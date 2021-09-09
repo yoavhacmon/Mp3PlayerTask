@@ -176,11 +176,23 @@ function createPlaylist(name, id) {
 
 
 function playPlaylist(id) {
-  // your code here
+  for (let i in player.playlists) {
+    if (player.playlists[i].id === id) {
+      for (let j in player.playlists[i].songs) {
+        player.playSong(player.playlists[i].songs[j])
+      }
+      return
+    }
+    else {
+      throw "WRONG ID";
+    }
+  }
 }
 
+
 function editPlaylist(playlistId, songId) {
-  // your code here
+  //check id
+
 }
 
 function playlistDuration(id) {
