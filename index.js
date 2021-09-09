@@ -48,12 +48,31 @@ const player = {
     { id: 5, name: 'Israeli', songs: [4, 5] },
   ],
   playSong(song) {
-    console.log(/* your code here */)
+    console.log("Playing " + song.title + "from " + song.album + "by " + song.artist + "| " + secondsToMmss(song.duration) + ".");
   },
+}
+function secondsToMmss(duration) {
+  let minutes = Math.floor(duration / 60);
+  let seconds = duration % 60;
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  return minutes + ":" + seconds;
 }
 
 function playSong(id) {
-  // your code here
+  for (let i in player.songs) {
+    if (player.songs[i].id === id) {
+      player.playSong(player.songs[i])
+      return
+    }
+    else {
+      throw "WRONG ID";
+    }
+  }
 }
 
 function removeSong(id) {
