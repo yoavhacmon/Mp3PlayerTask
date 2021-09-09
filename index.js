@@ -52,6 +52,7 @@ const player = {
   },
 }
 //Auxiliary functions:
+
 function secondsToMmss(duration) {
   let minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -69,21 +70,35 @@ function durationToSeconds(duration) {
   return secondDuration = (+mm * 60 + +ss);
 }
 
-
 function newIdFunc(id) {
-  let idlist = []
+  let idList = []
   for (let i of player.songs) {
-    idlist.push(i.id)
+    idList.push(i.id)
   }
   if (id === undefined) {
-    return Math.max(...idlist) + 1;
-  } else if (idlist.includes(id)) {
+    return Math.max(...idList) + 1;
+  } else if (idList.includes(id)) {
     throw "THIS ID IS TAKEN";
   } else {
-    return id
+    return id;
   }
 }
 
+function newIdPlaylistFunc(id) {
+  let idList = []
+  for (let i of player.playlists) {
+    idList.push(i.id)
+  }
+  if (id === undefined) {
+    return Math.max(...idList) + 1;
+  } else if (idList.includes(id)) {
+    throw "THIS ID IS TAKEN";
+  } else {
+    return id;
+  }
+}
+
+// app functions:
 
 function playSong(id) {
   for (let i in player.songs) {
@@ -145,8 +160,20 @@ function removePlaylist(id) {
 }
 
 function createPlaylist(name, id) {
-  // your code here
+  for (let i in player.playlists) {
+    if (player.playlists[i].id === id) {
+      throw "THIS ID IS ALREDY TAKEN";
+    }
+  }
+  let newPlaylist = {
+    'name': name,
+    'id': newIdPlaylistFunc(id),
+    'songs': []
+  }
+  player.playlists.push(newPlaylist)
+  return newPlaylist.id;
 }
+
 
 function playPlaylist(id) {
   // your code here
