@@ -134,7 +134,14 @@ function addSong(title, album, artist, duration, id) {
 }
 
 function removePlaylist(id) {
-  
+  for (let i in player.playlists) {
+    if (player.playlists[i].id === id) {
+      player.playlists.splice(i, 1)
+    }
+    else {
+      throw "WRONG ID";
+    }
+  }
 }
 
 function createPlaylist(name, id) {
