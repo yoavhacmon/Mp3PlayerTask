@@ -51,6 +51,7 @@ const player = {
     console.log("Playing " + song.title + " from " + song.album + " by " + song.artist + " | " + secondsToMmss(song.duration) + ".");
   },
 }
+//Auxiliary functions:
 function secondsToMmss(duration) {
   let minutes = Math.floor(duration / 60);
   let seconds = duration % 60;
@@ -62,6 +63,27 @@ function secondsToMmss(duration) {
   }
   return minutes + ":" + seconds;
 }
+function durationToSeconds(duration) {
+  let mm = duration[0] + duration[1];
+  let ss = duration[3] + duration[4];
+  return secondDuration = (+mm * 60 + +ss);
+}
+
+
+function newIdFunc(id) {
+  let idlist = []
+  for (let i of player.songs) {
+    idlist.push(i.id)
+  }
+  if (id === undefined) {
+    return Math.max(...idlist) + 1;
+  } else if (idlist.includes(id)) {
+    throw "THIS ID IS TAKEN";
+  } else {
+    return id
+  }
+}
+
 
 function playSong(id) {
   for (let i in player.songs) {
@@ -92,12 +114,27 @@ function removeSong(id) {
   }
 }
 
+
 function addSong(title, album, artist, duration, id) {
-  // your code here
+
+  for (let i in player.songs) {
+    if (player.songs[i].id === id) {
+      throw "THIS ID IS ALREDY TAKEN";
+    }
+  }
+  let newSong = {
+    'id': newIdFunc(id),
+    'title': title,
+    'album': album,
+    'artist': artist,
+    'duration': durationToSeconds(duration)
+  }
+  player.songs.push(newSong)
+  return newSong.id;
 }
 
 function removePlaylist(id) {
-  // your code here
+  
 }
 
 function createPlaylist(name, id) {
