@@ -48,7 +48,7 @@ const player = {
     { id: 5, name: 'Israeli', songs: [4, 5] },
   ],
   playSong(song) {
-    console.log("Playing " + song.title + "from " + song.album + "by " + song.artist + "| " + secondsToMmss(song.duration) + ".");
+    console.log("Playing " + song.title + " from " + song.album + " by " + song.artist + " | " + secondsToMmss(song.duration) + ".");
   },
 }
 function secondsToMmss(duration) {
