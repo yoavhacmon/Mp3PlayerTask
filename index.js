@@ -76,7 +76,20 @@ function playSong(id) {
 }
 
 function removeSong(id) {
-  // your code here
+  for (let i in player.songs) {
+    if (player.songs[i].id === id) {
+      player.songs.splice(i, 1)
+
+
+      for (let j in player.playlists) {
+        if (player.playlists[j].songs.includes(id)) {
+          player.playlists[j].songs.splice(player.playlists[j].songs.findIndex(item => item === id), 1)
+        }
+      } return
+    } else {
+      throw "WRONG ID";
+    }
+  }
 }
 
 function addSong(title, album, artist, duration, id) {
