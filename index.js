@@ -220,7 +220,21 @@ function editPlaylist(playlistId, songId) {
 
 
 function playlistDuration(id) {
-  // your code here
+  let totalDuration = 0;
+ for (let i of player.playlists) {
+   if (i.id === id) {
+     for (let j of i.songs) {
+       for (let n of player.songs) {
+         if (n.id === j) {
+         totalDuration += n.duration;
+         
+       }
+
+       }
+     }
+     
+   }
+ }return totalDuration;
 }
 
 function searchByQuery(query) {
