@@ -98,6 +98,7 @@ function newIdPlaylistFunc(id) {
   }
 }
 
+
 // app functions:
 
 function playSong(id) {
@@ -190,10 +191,33 @@ function playPlaylist(id) {
 }
 
 
-function editPlaylist(playlistId, songId) {
-  //check id
 
+
+function editPlaylist(playlistId, songId) {
+
+  for (let i of player.songs) {
+    if (i.id === songId) {
+      for (let j of player.playlists) {
+        if (j.id === playlistId) {
+          if (j.id === playlistId && j.songs.includes(songId) && j.songs.length > 1) {
+            j.songs.splice(j.songs.findIndex(song => song === songId), 1)
+          } else if (j.id === playlistId && j.songs.includes(songId) && j.songs.length <= 1) {
+            removePlaylist(playlistId)
+          } else if (j.id === playlistId && j.songs.indexOf(songId) < 0) {
+            j.songs.push(songId)
+          }
+          return
+        }
+
+      }
+      throw "WRONG PLAYLIS ID";
+    }
+  }
+  throw "WROND SONG ID";
 }
+
+
+
 
 function playlistDuration(id) {
   // your code here
