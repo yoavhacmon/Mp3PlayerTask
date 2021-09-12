@@ -99,7 +99,7 @@ function newIdPlaylistFunc(id) {
 }
 
 
-// app functions:
+// mp3 functions:
 
 function playSong(id) {
   for (let i in player.songs) {
